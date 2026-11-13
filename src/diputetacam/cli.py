@@ -175,7 +175,7 @@ def _cmd_daemon(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="diputetacam", description="DiputeCam control CLI")
+    parser = argparse.ArgumentParser(prog="diputetacam", description="Diputetacam control CLI")
     parser.add_argument("--version", action="version", version=__version__)
     parser.add_argument("--socket", type=Path, default=None, help="Unix socket path")
     parser.add_argument("--json", action="store_true", help="JSON output")

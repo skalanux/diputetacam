@@ -17,7 +17,7 @@ def config_path() -> Path:
 
 
 DEFAULT_CONFIG_TOML = """\
-# DiputeCam configuration.
+# Diputetacam configuration.
 # Changes are read when the daemon starts. Restart the daemon after editing.
 
 [output]

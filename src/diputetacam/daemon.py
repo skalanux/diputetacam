@@ -136,7 +136,7 @@ class Controller:
                 self._start_camera_initial()
             else:
                 log.info("standby: waiting for `diputetacam live`")
-                self._notify("DiputeCam", "En espera; usa `diputetacam live`")
+                self._notify("Diputetacam", "En espera; usa `diputetacam live`")
 
     def _on_standby_timeout(self, source: Source, reason: str) -> None:
         self._detach_source(source)
@@ -187,7 +187,7 @@ class Controller:
         self._last_error = None
         self.pipeline.set_recording(True)
         log.info("live: %s", self._camera_description(source))
-        self._notify("DiputeCam", "Cámara en vivo")
+        self._notify("Diputetacam", "Cámara en vivo")
 
     def _on_camera_initial_timeout(self, source: Source, reason: str) -> None:
         self._detach_source(source)
@@ -333,7 +333,7 @@ class Controller:
         self._last_error = None
         log.info("loop active: %.2fs", self._loop_info.get("seconds", 0))
         self._notify(
-            "DiputeCam",
+            "Diputetacam",
             f"Loop activo: {self._loop_info.get('seconds', 0):.1f} s",
         )
 
@@ -458,7 +458,7 @@ class Controller:
         self.state = LIVE
         self._last_error = None
         log.info("back live: %s", self._camera_description(camera))
-        self._notify("DiputeCam", "Cámara en vivo")
+        self._notify("Diputetacam", "Cámara en vivo")
 
     def _start_camera_for_live(self) -> None:
         if self.state in (STARTING, ENTERING_LOOP, RETURNING):
@@ -494,7 +494,7 @@ class Controller:
         self.state = LIVE
         self._last_error = None
         log.info("live: %s", self._camera_description(source))
-        self._notify("DiputeCam", "Cámara en vivo")
+        self._notify("Diputetacam", "Cámara en vivo")
 
     def _on_live_camera_timeout(self, source: Source, reason: str) -> None:
         self._detach_source(source)
@@ -539,7 +539,7 @@ class Controller:
         self.pipeline.ring.clear()
         self.state = STANDBY
         self._last_error = None
-        self._notify("DiputeCam", "Cámara apagada")
+        self._notify("Diputetacam", "Cámara apagada")
 
     def _on_standby_command_timeout(self, source: Source, reason: str) -> None:
         self._detach_source(source)
@@ -729,12 +729,12 @@ class Controller:
     def _set_error(self, message: str) -> None:
         self._last_error = message
         log.error("%s", message)
-        self._notify("DiputeCam", message, urgent=True)
+        self._notify("Diputetacam", message, urgent=True)
 
     def _notify(self, title: str, message: str, urgent: bool = False) -> None:
         if not shutil.which("notify-send"):
             return
-        args = ["notify-send", "-a", "DiputeCam", "-t", "3000"]
+        args = ["notify-send", "-a", "Diputetacam", "-t", "3000"]
         if urgent:
             args += ["-u", "critical"]
         args += [title, message]
@@ -748,7 +748,7 @@ class Controller:
 
 
 def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(prog="diputetacamd", description="DiputeCam daemon")
+    parser = argparse.ArgumentParser(prog="diputetacamd", description="Diputetacam daemon")
     parser.add_argument("--config", type=Path, default=None, help="config TOML path")
     parser.add_argument("--test", action="store_true", help="use a test pattern and fakesink")
     parser.add_argument("--socket", type=Path, default=None, help="Unix socket path")

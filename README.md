@@ -1,4 +1,4 @@
-# DiputeCam
+# Diputetacam
 
 Cámara virtual para Linux con un **loop natural de los últimos 20 segundos**. Pensada para Meet, Teams, Zoom y cualquier aplicación que consuma V4L2, sin OBS.
 

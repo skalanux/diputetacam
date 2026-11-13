@@ -34,16 +34,16 @@ def _fmt_bytes(value: float | int) -> str:
     return f"{value:.1f} GB"
 
 
-class DiputeCamWindow(Adw.ApplicationWindow):
+class DiputetacamWindow(Adw.ApplicationWindow):
     def __init__(self, application: Adw.Application) -> None:
-        super().__init__(application=application, title="DiputeCam")
+        super().__init__(application=application, title="Diputetacam")
         self.set_default_size(540, 460)
         self._stop = threading.Event()
         self._connected = True
         self._last_status: dict[str, Any] = {}
 
         header = Adw.HeaderBar()
-        title = Adw.WindowTitle(title="DiputeCam", subtitle="Cámara virtual con loop natural")
+        title = Adw.WindowTitle(title="Diputetacam", subtitle="Cámara virtual con loop natural")
         header.set_title_widget(title)
 
         root = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=14)
@@ -228,19 +228,19 @@ class DiputeCamWindow(Adw.ApplicationWindow):
             GLib.idle_add(self._show_command_error, response.get("error", "comando fallido"))
 
 
-class DiputeCamApp(Adw.Application):
+class DiputetacamApp(Adw.Application):
     def __init__(self) -> None:
-        super().__init__(application_id="io.github.skalanux.DiputeCam")
-        self.window: DiputeCamWindow | None = None
+        super().__init__(application_id="io.github.skalanux.Diputetacam")
+        self.window: DiputetacamWindow | None = None
 
     def do_activate(self) -> None:
         if self.window is None:
-            self.window = DiputeCamWindow(self)
+            self.window = DiputetacamWindow(self)
         self.window.present()
 
 
 def main(argv: list[str] | None = None) -> int:
-    app = DiputeCamApp()
+    app = DiputetacamApp()
     return app.run(argv if argv is not None else sys.argv)
 
 

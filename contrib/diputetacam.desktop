@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=DiputeCam
+Name=Diputetacam
 Comment=Virtual camera with a natural loop
 Exec=diputetacam-gui
 Icon=camera-video
