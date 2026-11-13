@@ -23,6 +23,9 @@ Instalado en ~/.local/bin y ~/.config/systemd/user.
 Para arrancar el daemon ahora:
   systemctl --user enable --now diputetacamd
 
+El daemon arranca en standby (cámara apagada). Para empezar:
+  diputetacam live
+
 Comprobar:
   diputetacam doctor
   diputetacam status

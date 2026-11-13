@@ -132,14 +132,21 @@ class Controller:
         self._cut(source)
         self.state = STANDBY
         if initial:
-            self._start_camera_initial()
+            if self.config.startup.live:
+                self._start_camera_initial()
+            else:
+                log.info("standby: waiting for `diputetacam live`")
+                self._notify("DiputeCam", "En espera; usa `diputetacam live`")
 
     def _on_standby_timeout(self, source: Source, reason: str) -> None:
         self._detach_source(source)
         self._standby_source = None
         self._set_error(f"standby source did not start: {reason}")
         if self.state == STARTING:
-            self._start_camera_initial()
+            if self.config.startup.live:
+                self._start_camera_initial()
+            else:
+                self.state = ERROR
 
     def _make_camera(self) -> CameraSource | TestSource:
         if self.test_mode:

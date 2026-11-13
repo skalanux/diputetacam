@@ -29,6 +29,11 @@ class ConfigTest(unittest.TestCase):
         self.assertEqual(config.buffer.seconds, 30.0)
         self.assertEqual(config.transition.freeze_ms, 250)
 
+    def test_startup_defaults_to_standby(self) -> None:
+        self.assertFalse(Config().startup.live)
+        config = config_from_dict({"startup": {"live": True}})
+        self.assertTrue(config.startup.live)
+
     def test_invalid_fps(self) -> None:
         with self.assertRaises(ConfigError):
             config_from_dict({"output": {"fps": 0}})

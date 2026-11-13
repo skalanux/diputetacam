@@ -42,7 +42,10 @@ sudo ./contrib/setup-v4l2loopback.sh
 systemctl --user enable --now diputetacamd
 
 diputetacam doctor
+diputetacam live   # arranca la cámara y el buffer (20 s)
 ```
+
+El daemon arranca en **standby** por defecto: la cámara física está apagada y Meet/Teams ven la tarjeta de “cámara apagada”. `diputetacam live` enciende la cámara y empieza a llenar el buffer. Si prefieres que arranque en vivo, pon `[startup] live = true` en la configuración.
 
 `setup-v4l2loopback.sh` escribe:
 
@@ -136,10 +139,13 @@ min_loop_seconds = 15
 max_loop_seconds = 20
 jpeg_quality = 80
 max_memory_mb = 256
-match_threshold = 18.0
+match_threshold = 24.0
 
 [transition]
 freeze_ms = 150
+
+[startup]
+live = false
 ```
 
 Reinicia el daemon después de editar:

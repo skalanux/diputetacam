@@ -25,7 +25,7 @@ def choose_loop_start(
     frames: list[Frame],
     min_seconds: float = 15.0,
     max_seconds: float = 20.0,
-    threshold: float = 18.0,
+    threshold: float = 24.0,
 ) -> LoopMatch:
     """Pick the start frame for a natural loop.
 

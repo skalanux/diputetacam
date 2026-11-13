@@ -44,11 +44,16 @@ jpeg_quality = 80
 max_memory_mb = 256
 # Mean absolute difference (0-255) between 32x18 luma thumbnails.
 # Lower is stricter. If no frame is below this, use the full buffer.
-match_threshold = 18.0
+match_threshold = 24.0
 
 [transition]
 # How long the current frame stays frozen before the cut.
 freeze_ms = 150
+
+[startup]
+# false: start in standby (camera released). Run `diputetacam live` to start.
+# true: start the camera and ring buffer as soon as the daemon starts.
+live = false
 """
 
 
@@ -76,7 +81,7 @@ class BufferConfig:
     max_loop_seconds: float = 20.0
     jpeg_quality: int = 80
     max_memory_mb: int = 256
-    match_threshold: float = 18.0
+    match_threshold: float = 24.0
 
 
 @dataclass
@@ -85,11 +90,17 @@ class TransitionConfig:
 
 
 @dataclass
+class StartupConfig:
+    live: bool = False
+
+
+@dataclass
 class Config:
     output: OutputConfig = field(default_factory=OutputConfig)
     camera: CameraConfig = field(default_factory=CameraConfig)
     buffer: BufferConfig = field(default_factory=BufferConfig)
     transition: TransitionConfig = field(default_factory=TransitionConfig)
+    startup: StartupConfig = field(default_factory=StartupConfig)
 
     def validate(self) -> None:
         if self.output.width < 320 or self.output.height < 240:
@@ -162,6 +173,10 @@ def config_from_dict(data: dict[str, Any]) -> Config:
     trans = _section(data, "transition")
     cfg.transition = TransitionConfig(
         freeze_ms=_get(trans, "freeze_ms", cfg.transition.freeze_ms, int),
+    )
+    startup = _section(data, "startup")
+    cfg.startup = StartupConfig(
+        live=_get(startup, "live", cfg.startup.live, bool),
     )
     cfg.validate()
     return cfg
