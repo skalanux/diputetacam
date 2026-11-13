@@ -1,0 +1,15 @@
+[Unit]
+Description=DiputeCam virtual camera daemon
+Documentation=https://github.com/skalanux/diputetacam
+After=pipewire.service
+Wants=pipewire.service
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/diputetacamd
+Restart=on-failure
+RestartSec=2
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target

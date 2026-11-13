@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "diputetacam"
+version = "0.1.0"
+description = "A natural-loop virtual camera for Linux"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Juan Manuel Schillaci" }]
+dependencies = []
+
+[project.scripts]
+diputetacam = "diputetacam.cli:main"
+diputetacamd = "diputetacam.daemon:main"
+diputetacam-gui = "diputetacam.gui:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+diputetacam = ["data/*"]
