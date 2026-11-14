@@ -20,7 +20,6 @@ Todavía no incluye captura de pantalla, audio, blur por IA ni múltiples cámar
 
 ## Requisitos
 
-- Arch Linux / Omarchy (el instalador asume `pacman`).
 - Python 3.11+.
 - GStreamer 1.20+ con `gst-plugins-base`, `gst-plugins-good` y `gst-plugins-bad`.
 - PyGObject, GTK4 y libadwaita.
@@ -58,7 +57,7 @@ y carga el módulo. Si ya estaba cargado y no se puede descargar, reinicia o cie
 
 ### Secure Boot
 
-Si tienes Secure Boot activo, el módulo DKMS tiene que estar firmado. En Omarchy el Secure Boot de esta máquina está desactivado, así que no hace falta. Si lo activas, firma el módulo con `sbctl` o la herramienta de tu distribución.
+Si tienes Secure Boot activo, el módulo DKMS tiene que estar firmado. Si lo activas, firma el módulo con `sbctl` o la herramienta de tu distribución.
 
 ## Uso
 
@@ -216,7 +215,9 @@ El daemon en modo test usa `fakesink` y una fuente `videotestsrc`; el socket es 
 
 - El loop repite un fragmento: en una reunión larga se puede notar. 20 s cubren una pausa corta; 30–45 s se notan menos, a cambio de más RAM.
 - No hay audio, blur por IA, captura de pantalla ni múltiples salidas todavía.
-- Simular presencia puede ir contra las normas de tu trabajo o estudio. Úsalo solo donde esté permitido y con criterio.
+
+
+Es solo un expermiento divertido...
 
 ## Licencia
 
